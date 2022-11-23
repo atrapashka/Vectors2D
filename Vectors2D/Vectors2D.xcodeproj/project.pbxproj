@@ -16,6 +16,7 @@
 		979FE5DD292E815C00871AF8 /* AddVectorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979FE5DC292E815C00871AF8 /* AddVectorScreen.swift */; };
 		979FE5DF292E816600871AF8 /* AddVectorScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 979FE5DE292E816600871AF8 /* AddVectorScreen.storyboard */; };
 		97B373E0292E950400F3505A /* CustomVectorListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B373DF292E950400F3505A /* CustomVectorListCell.swift */; };
+		97B373E2292EB86E00F3505A /* VectorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B373E1292EB86E00F3505A /* VectorManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		979FE5DC292E815C00871AF8 /* AddVectorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVectorScreen.swift; sourceTree = "<group>"; };
 		979FE5DE292E816600871AF8 /* AddVectorScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddVectorScreen.storyboard; sourceTree = "<group>"; };
 		97B373DF292E950400F3505A /* CustomVectorListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVectorListCell.swift; sourceTree = "<group>"; };
+		97B373E1292EB86E00F3505A /* VectorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				979FE5C6292D352400871AF8 /* GameScene.swift */,
 				979FE5C8292D352400871AF8 /* GameViewController.swift */,
 				97B373DF292E950400F3505A /* CustomVectorListCell.swift */,
+				97B373E1292EB86E00F3505A /* VectorManager.swift */,
 				979FE5CA292D352400871AF8 /* Main.storyboard */,
 				979FE5E0292E816A00871AF8 /* AddVectorScreen */,
 				979FE5CD292D352600871AF8 /* Assets.xcassets */,
@@ -156,6 +159,7 @@
 			files = (
 				979FE5DD292E815C00871AF8 /* AddVectorScreen.swift in Sources */,
 				979FE5C7292D352400871AF8 /* GameScene.swift in Sources */,
+				97B373E2292EB86E00F3505A /* VectorManager.swift in Sources */,
 				979FE5C9292D352400871AF8 /* GameViewController.swift in Sources */,
 				97B373E0292E950400F3505A /* CustomVectorListCell.swift in Sources */,
 				979FE5C1292D352400871AF8 /* AppDelegate.swift in Sources */,

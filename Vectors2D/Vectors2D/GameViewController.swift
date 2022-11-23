@@ -32,6 +32,7 @@ class GameViewController: UIViewController {
     }
     
     @objc func onBurgerButton() {
+        print(VectorManager.shared.pointsArray)
         if burgerButton.currentImage == UIImage(named: "burgerButton") {
             UIView.animate(withDuration: 0.5, delay: 0, options: []) { [self] in
                 menuView.frame = CGRect(x: view.bounds.minY,
@@ -41,8 +42,6 @@ class GameViewController: UIViewController {
                 burgerButton.alpha = 0
                 burgerButton.setImage(UIImage(named: "closeButton"), for: .normal)
                 burgerButton.alpha = 1
-            } completion: { _ in
-                self.view.isUserInteractionEnabled = false
             }
         } else {
             UIView.animate(withDuration: 0.5, delay: 0, options: []) { [self] in
@@ -53,8 +52,6 @@ class GameViewController: UIViewController {
                 burgerButton.alpha = 0
                 burgerButton.setImage(UIImage(named: "burgerButton"), for: .normal)
                 burgerButton.alpha = 1
-            } completion: { _ in
-                self.view.isUserInteractionEnabled = true
             }
         }
     }
@@ -66,7 +63,7 @@ class GameViewController: UIViewController {
     }
     
     private func setupUI() {
-//        view.backgroundColor = .systemGray4
+        view.backgroundColor = .darkGray
         
         var addVectorButtonWidth: CGFloat = view.bounds.width / 6
         var addVectorButtonHeight = addVectorButtonWidth
@@ -100,37 +97,44 @@ class GameViewController: UIViewController {
                                 y: view.bounds.minY,
                                 width: view.bounds.width / 3,
                                 height: view.bounds.height)
-        menuView.backgroundColor = .systemPink
+        menuView.backgroundColor = .systemGray
         menuView.alpha = 0.8
         
         view.addSubview(menuView)
         
-//        func updateSideMenuAnimationPoint(view: UIView) -> CGRect {
-//            return CGRect(x: view.bounds.minY,
-//                          y: view.bounds.minX,
-//                          width: view.bounds.width / 4.5,
-//                          height: view.bounds.height)
-//        }
+        let infoMenuViewLabel = UILabel()
+        
+        var widthValue: CGFloat = menuView.bounds.width
+        var heightValue = widthValue / 3
+        
+        infoMenuViewLabel.frame = CGRect(x: menuView.bounds.midX - widthValue / 2,
+                                         y: menuView.bounds.minY + widthValue / 1.5,
+                                         width: widthValue,
+                                         height: heightValue)
+        infoMenuViewLabel.text = "Vectors:"
+        infoMenuViewLabel.textAlignment = .center
+        menuView.addSubview(infoMenuViewLabel)
     }
     
     private func setupCollectionView() {
         let layoutFlow = UICollectionViewFlowLayout()
         layoutFlow.scrollDirection = .vertical
-        layoutFlow.itemSize = CGSize(width: menuView.bounds.width / 1.2,
-                                     height: menuView.bounds.width / 2)
-        let collectionViewWidth: CGFloat = menuView.bounds.width / 1.05
-        let collectionViewHeight: CGFloat = menuView.bounds.height / 1.05
+        layoutFlow.itemSize = CGSize(width: menuView.bounds.width / 1.1,
+                                     height: menuView.bounds.width / 2.5)
+        let collectionViewWidth: CGFloat = menuView.bounds.width / 1.1
+        let collectionViewHeight: CGFloat = menuView.bounds.height
         let collectionViewFrame = CGRect(x: menuView.bounds.midX - collectionViewWidth / 2,
                                          y: menuView.bounds.midY - collectionViewHeight / 3,
                                          width: collectionViewWidth,
-                                         height: collectionViewHeight / 1.5)
+                                         height: collectionViewHeight / 1.4)
         listCollectionView = UICollectionView(frame: collectionViewFrame,
-                                                collectionViewLayout: layoutFlow)
+                                              collectionViewLayout: layoutFlow)
         listCollectionView.register(CustomVectorListCell.self,
                                     forCellWithReuseIdentifier: CustomVectorListCell.identifier)
         listCollectionView.dataSource = self
         listCollectionView.delegate = self
         listCollectionView.showsVerticalScrollIndicator = false
+        listCollectionView.backgroundColor = .none
         
         menuView.addSubview(listCollectionView)
     }
@@ -144,7 +148,8 @@ extension GameViewController: UICollectionViewDelegate & UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomVectorListCell.identifier,
                                                       for: indexPath) as! CustomVectorListCell
-        cell.configure(vectorName: "testName")
+        
+        cell.configure(vectorName: "vectorName")
         
         return cell
     }

@@ -18,9 +18,7 @@ class CustomVectorListCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.backgroundColor = .systemGray4
-        contentView.layer.cornerRadius = 20
-        contentView.clipsToBounds = true
+        contentView.backgroundColor = .systemPink
         
         vectorNameLabel.textAlignment = .center
         vectorNameLabel.frame = CGRect(x: 0,
