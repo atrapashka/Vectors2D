@@ -6,6 +6,9 @@ class GameViewController: UIViewController {
     
 //    let path = UIBezierPath()
     private var addVectorButton = UIButton()
+    private var burgerButton = UIButton()
+    private var menuView = UIView()
+    private var listCollectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,20 +19,60 @@ class GameViewController: UIViewController {
         
         scene.size = CGSize(width: view.bounds.width * 2,
                             height: view.bounds.height * 2)
-//        scene.backgroundColor = .systemYellow
+        scene.backgroundColor = .darkGray
         
         setupUI()
-        drawVectors()
+        setupMenuView()
+        setupCollectionView()
+    }
+    
+    @objc private func onAddVectorButton() {
+        print("To add vector screen")
+        transitToScoreScreen()
+    }
+    
+    @objc func onBurgerButton() {
+        if burgerButton.currentImage == UIImage(named: "burgerButton") {
+            UIView.animate(withDuration: 0.5, delay: 0, options: []) { [self] in
+                menuView.frame = CGRect(x: view.bounds.minY,
+                                        y: view.bounds.minX,
+                                        width: view.bounds.width / 3,
+                                        height: view.bounds.height)
+                burgerButton.alpha = 0
+                burgerButton.setImage(UIImage(named: "closeButton"), for: .normal)
+                burgerButton.alpha = 1
+            } completion: { _ in
+                self.view.isUserInteractionEnabled = false
+            }
+        } else {
+            UIView.animate(withDuration: 0.5, delay: 0, options: []) { [self] in
+                menuView.frame = CGRect(x: view.bounds.minX - view.bounds.width / 2,
+                                        y: view.bounds.minY,
+                                        width: view.bounds.width / 3,
+                                        height: view.bounds.height)
+                burgerButton.alpha = 0
+                burgerButton.setImage(UIImage(named: "burgerButton"), for: .normal)
+                burgerButton.alpha = 1
+            } completion: { _ in
+                self.view.isUserInteractionEnabled = true
+            }
+        }
+    }
+    
+    func transitToScoreScreen() {
+        let storyboard = UIStoryboard.init(name: "AddVectorScreen", bundle: Bundle.main)
+        let vc = storyboard.instantiateInitialViewController() as! AddVectorScreen
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setupUI() {
-        view.backgroundColor = .systemGray4
+//        view.backgroundColor = .systemGray4
         
-        var addVectorButtonWidth: CGFloat = view.bounds.width / 3
-        var addVectorButtonHeight = addVectorButtonWidth / 3
+        var addVectorButtonWidth: CGFloat = view.bounds.width / 6
+        var addVectorButtonHeight = addVectorButtonWidth
         
         addVectorButton.frame = CGRect(x: view.bounds.midX - addVectorButtonWidth / 2,
-                                       y: view.bounds.maxY - addVectorButtonHeight * 2,
+                                       y: view.bounds.maxY - addVectorButtonHeight * 1.75,
                                        width: addVectorButtonWidth,
                                        height: addVectorButtonHeight)
         addVectorButton.backgroundColor = .systemPink
@@ -44,18 +87,65 @@ class GameViewController: UIViewController {
         
         
         view.addSubview(addVectorButton)
-    }
-    
-    private func drawVectors() {
-//        path.move(to: CGPoint(x: -200, y: 0))
-//        path.addCurve(to: CGPoint(x: 0, y: 0), controlPoint1: CGPoint(x: 0, y: 0), controlPoint2: CGPoint(x: -200, y: 0))
-//        path.addCurve(to: CGPoint(x: 140, y: 0), controlPoint1: CGPoint(x: 60, y: 180), controlPoint2: CGPoint(x: 140, y: 10))
-//        path.addCurve(to: CGPoint(x: 280, y: 0), controlPoint1: CGPoint(x: 220, y: -180), controlPoint2: CGPoint(x: 280, y: 0))
-//        path.addCurve(to: CGPoint(x: 440, y: 0), controlPoint1: CGPoint(x: 400, y: -300), controlPoint2: CGPoint(x: 440, y: 0))
-
-    }
-    
-    @objc func onAddVectorButton() {
         
+        burgerButton.addTarget(self, action: #selector(onBurgerButton), for: .touchUpInside)
+        burgerButton.setImage(UIImage(named: "burgerButton"), for: .normal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: burgerButton)
+        
+        view.addSubview(burgerButton)
+    }
+    
+    private func setupMenuView() {
+        menuView.frame = CGRect(x: view.bounds.minX - view.bounds.width / 2,
+                                y: view.bounds.minY,
+                                width: view.bounds.width / 3,
+                                height: view.bounds.height)
+        menuView.backgroundColor = .systemPink
+        menuView.alpha = 0.8
+        
+        view.addSubview(menuView)
+        
+//        func updateSideMenuAnimationPoint(view: UIView) -> CGRect {
+//            return CGRect(x: view.bounds.minY,
+//                          y: view.bounds.minX,
+//                          width: view.bounds.width / 4.5,
+//                          height: view.bounds.height)
+//        }
+    }
+    
+    private func setupCollectionView() {
+        let layoutFlow = UICollectionViewFlowLayout()
+        layoutFlow.scrollDirection = .vertical
+        layoutFlow.itemSize = CGSize(width: menuView.bounds.width / 1.2,
+                                     height: menuView.bounds.width / 2)
+        let collectionViewWidth: CGFloat = menuView.bounds.width / 1.05
+        let collectionViewHeight: CGFloat = menuView.bounds.height / 1.05
+        let collectionViewFrame = CGRect(x: menuView.bounds.midX - collectionViewWidth / 2,
+                                         y: menuView.bounds.midY - collectionViewHeight / 3,
+                                         width: collectionViewWidth,
+                                         height: collectionViewHeight / 1.5)
+        listCollectionView = UICollectionView(frame: collectionViewFrame,
+                                                collectionViewLayout: layoutFlow)
+        listCollectionView.register(CustomVectorListCell.self,
+                                    forCellWithReuseIdentifier: CustomVectorListCell.identifier)
+        listCollectionView.dataSource = self
+        listCollectionView.delegate = self
+        listCollectionView.showsVerticalScrollIndicator = false
+        
+        menuView.addSubview(listCollectionView)
+    }
+}
+
+extension GameViewController: UICollectionViewDelegate & UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomVectorListCell.identifier,
+                                                      for: indexPath) as! CustomVectorListCell
+        cell.configure(vectorName: "testName")
+        
+        return cell
     }
 }
