@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9796C675292FE61C004F863D /* VectorModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9796C673292FE61C004F863D /* VectorModel.xcdatamodeld */; };
+		9796C678292FE81A004F863D /* Vector+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9796C676292FE81A004F863D /* Vector+CoreDataClass.swift */; };
+		9796C679292FE81A004F863D /* Vector+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9796C677292FE81A004F863D /* Vector+CoreDataProperties.swift */; };
 		979FE5C1292D352400871AF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979FE5C0292D352400871AF8 /* AppDelegate.swift */; };
 		979FE5C7292D352400871AF8 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979FE5C6292D352400871AF8 /* GameScene.swift */; };
 		979FE5C9292D352400871AF8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979FE5C8292D352400871AF8 /* GameViewController.swift */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9796C674292FE61C004F863D /* VectorModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VectorModel.xcdatamodel; sourceTree = "<group>"; };
+		9796C676292FE81A004F863D /* Vector+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vector+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9796C677292FE81A004F863D /* Vector+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vector+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		979FE5BD292D352400871AF8 /* Vectors2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vectors2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		979FE5C0292D352400871AF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		979FE5C6292D352400871AF8 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -44,6 +50,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9796C67A292FE82C004F863D /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				9796C676292FE81A004F863D /* Vector+CoreDataClass.swift */,
+				9796C677292FE81A004F863D /* Vector+CoreDataProperties.swift */,
+				9796C673292FE61C004F863D /* VectorModel.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		979FE5B4292D352400871AF8 = {
 			isa = PBXGroup;
 			children = (
@@ -66,9 +82,10 @@
 				979FE5C0292D352400871AF8 /* AppDelegate.swift */,
 				979FE5C6292D352400871AF8 /* GameScene.swift */,
 				979FE5C8292D352400871AF8 /* GameViewController.swift */,
+				979FE5CA292D352400871AF8 /* Main.storyboard */,
 				97B373DF292E950400F3505A /* CustomVectorListCell.swift */,
 				97B373E1292EB86E00F3505A /* VectorManager.swift */,
-				979FE5CA292D352400871AF8 /* Main.storyboard */,
+				9796C67A292FE82C004F863D /* CoreData */,
 				979FE5E0292E816A00871AF8 /* AddVectorScreen */,
 				979FE5CD292D352600871AF8 /* Assets.xcassets */,
 				979FE5CF292D352600871AF8 /* LaunchScreen.storyboard */,
@@ -157,10 +174,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9796C675292FE61C004F863D /* VectorModel.xcdatamodeld in Sources */,
 				979FE5DD292E815C00871AF8 /* AddVectorScreen.swift in Sources */,
 				979FE5C7292D352400871AF8 /* GameScene.swift in Sources */,
 				97B373E2292EB86E00F3505A /* VectorManager.swift in Sources */,
+				9796C678292FE81A004F863D /* Vector+CoreDataClass.swift in Sources */,
 				979FE5C9292D352400871AF8 /* GameViewController.swift in Sources */,
+				9796C679292FE81A004F863D /* Vector+CoreDataProperties.swift in Sources */,
 				97B373E0292E950400F3505A /* CustomVectorListCell.swift in Sources */,
 				979FE5C1292D352400871AF8 /* AppDelegate.swift in Sources */,
 			);
@@ -382,6 +402,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9796C673292FE61C004F863D /* VectorModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9796C674292FE61C004F863D /* VectorModel.xcdatamodel */,
+			);
+			currentVersion = 9796C674292FE61C004F863D /* VectorModel.xcdatamodel */;
+			path = VectorModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 979FE5B5292D352400871AF8 /* Project object */;
 }

@@ -4,7 +4,7 @@ import SpriteKit
 
 class GameViewController: UIViewController {
     
-//    let path = UIBezierPath()
+    private var pointsArray = VectorManager.shared.pointsArray
     private var addVectorButton = UIButton()
     private var burgerButton = UIButton()
     private var menuView = UIView()
@@ -24,6 +24,17 @@ class GameViewController: UIViewController {
         setupUI()
         setupMenuView()
         setupCollectionView()
+        
+        var yourline = SKShapeNode()
+        var pathToDraw = CGMutablePath()
+        pathToDraw.move(to: CGPoint(x: pointsArray[0][0],
+                                    y: pointsArray[0][0]))
+        pathToDraw.addLine(to: CGPoint(x: view.bounds.width * 1.5,
+                                       y: 500))
+        yourline.path = pathToDraw
+        yourline.lineWidth = 10
+        yourline.strokeColor = SKColor.red
+        scene.addChild(yourline)
     }
     
     @objc private func onAddVectorButton() {

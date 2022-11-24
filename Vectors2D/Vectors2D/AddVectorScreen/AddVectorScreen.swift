@@ -4,7 +4,7 @@ import UIKit
 class AddVectorScreen: UIViewController {
     
     private var addButton = UIButton()
-    var coordinatesArray: [CGFloat] = [0, 0, 0, 0]
+    var coordinatesArray: [CGFloat] = [50, 50, 150, 150]
     @IBOutlet weak var firstPointX: UITextField!
     @IBOutlet weak var firstPointY: UITextField!
     @IBOutlet weak var secondPointX: UITextField!
@@ -26,14 +26,12 @@ class AddVectorScreen: UIViewController {
     
     @IBAction func onAddVectorButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
-        
+        VectorManager.shared.addPointArray(addingArray: coordinatesArray)
     }
     
     private func setupTextFields(field: UITextField) {
         field.returnKeyType = .done
         field.autocorrectionType = .no
-//        field.becomeFirstResponder()
-        
         field.delegate = self
     }
 }
@@ -42,16 +40,16 @@ extension AddVectorScreen: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
-        let point = Int(textField.text!)!
+        let point = CGFloat(Int(textField.text!)!)
         
         if textField == firstPointX {
-            VectorManager.shared.addPointX(point: point)
+            coordinatesArray[0] = (view.bounds.width / 2) + point
         } else if textField == firstPointY {
-            VectorManager.shared.addPointY(point: point)
+            coordinatesArray[1] = (view.bounds.height / 2) + point
         } else if textField == secondPointX {
-            VectorManager.shared.addSecondPointX(point: point)
+            coordinatesArray[2] = (view.bounds.width / 2) + point
         } else {
-            VectorManager.shared.addSecondPointY(point: point)
+            coordinatesArray[3] = (view.bounds.height / 2) + point
         }
         
         return true
