@@ -3,19 +3,12 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    let label = SKLabelNode(text: "BEBRA")
-    let panGesture = UIPanGestureRecognizer()
-    var previousPan: CGPoint = CGPoint.zero
-    let cameraNode = SKCameraNode()
+    private let panGesture = UIPanGestureRecognizer()
+    private var previousPan: CGPoint = CGPoint.zero
+    private let cameraNode = SKCameraNode()
     
     override func didMove(to view: SKView) {
-        
-        label.position = CGPoint(x: view.frame.width / 2,
-                                 y: view.frame.height / 2)
-        label.fontSize = 45
-        label.fontColor = SKColor.yellow
-        label.fontName = "Avenir"
-        addChild(label)
+
         
         panGesture.addTarget(self, action: #selector(onPanGesture))
         panGesture.minimumNumberOfTouches = 1
